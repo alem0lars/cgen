@@ -1,0 +1,139 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+
+\input{./header/packages}
+
+
+% == Theme ====================================================================
+% Theme style
+\moderncvstyle{casual}
+% Theme color (used for decorations)
+\moderncvcolor{blue}
+
+
+% == Page settings ============================================================
+% Adjust the page margins
+\usepackage[scale=0.8]{geometry}
+
+% Adjust the columns margin for the tabular
+\setlength\arrayrulewidth{.4pt}
+\setlength\tabcolsep{2pt}
+
+
+% == Author data ==============================================================
+% First name
+\firstname{<= global.first_name =>}
+% Second name
+\familyname{<= global.sur_name =>}
+% Address
+\address%
+	{<= global.address.street =>}%
+	{<= global.address.postal_code =>}%
+	{<= global.address.city =>}
+% Mobile phone
+\mobile{<= global.mobile_phone =>}
+% Main phone
+\phone{<= global.phone =>}
+% Fax
+\fax{<= global.fax =>}
+% Email
+\email{<= global.email =>}
+% Homepage for personal website
+\homepage{<= global.homepage =>}
+% Additional informations
+\extrainfo{<= global.additional_informations =>}
+% Photo of the author
+\photo[64pt][0.4pt]{./resources/AuthorPhoto}
+
+
+% == Document informations ====================================================
+\title{<= global.title =>}			% Document title
+\quote{<= global.quote =>}				% A quote to recap my point of view
+
+
+% == Bibliography =============================================================
+\makeatletter
+\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+\makeatother
+
+
+% == Content ==================================================================
+\begin{document}
+
+
+	\makecvtitle
+
+
+	% == Personal Information ===================================================
+	\section{<= titles.S_1.personal_info =>}
+
+		\cvitem{<= titles.S_1.name =>}{%
+			<= global.first_name =>~<= global.sur_name =>%
+		}
+		\cvitem{<= titles.S_1.address =>}{%
+			<= global.address.street =>~--~%
+			<= global.address.postal_code =>~--~%
+			<= global.address.city =>%
+		}
+		\cvitem{<= titles.S_1.telephone =>}{<= global.mobile_phone =>}
+		\cvitem{<= titles.S_1.fax =>}{<= global.fax =>}
+		\cvitem{<= titles.S_1.email =>}{<= global.email =>}
+		\cvitem{<= titles.S_1.nationality =>}{<= global.nationality =>}
+		\cvitem{<= titles.S_1.date_birth =>}{<= global.date_birth =>}
+		\cvitem{<= titles.S_1.sex =>}{<= global.sex =>}
+
+
+	% == Desidered Employment ===================================================
+	\section{<= titles.S_2.desired_employment => }
+
+		<= generate(cvlistitem, desired_employments) =>
+
+
+	% == Education and training =================================================
+	\section{<= titles.S_4.education_and_training =>}
+
+		<= generate(education, education) =>
+
+
+	% == Work Experience ========================================================
+	\section{<= titles.S_3.work_experience =>}
+
+		<= generate(work_experience, work_experience) =>
+
+
+	% == Personal skills and competences ========================================
+	\section{<= titles.S_5.personal_skills =>}
+
+		\cvitem{<= titles.S_5.mother_tongue =>}{<= language_skills.mother_tongue =>}
+
+		\cvitem{<= titles.S_5.other_languages =>}{<= generate(list, language_skills.other_languages) =>}
+
+		<= generate(self_assessment, self_assessment) =>
+
+		\cvitem{<= titles.S_5.driving_license =>}{<= driving_license =>}
+
+		\cvitem{<= titles.S_5.social_skills =>}{<= generate(list, social_skills) =>}
+
+		\cvitem{<= titles.S_5.organisational_skills =>}{<= generate(list, organisational_skills) =>}
+
+		\subsection{<= titles.S_5.analysis_skills =>}
+			<= generate(cvitemwithcomment, technical_skills.analysis) =>
+		\subsection{<= titles.S_5.design_skills =>}
+			<= generate(cvitemwithcomment, technical_skills.design) =>
+		\subsection{<= titles.S_5.programming_skills =>}
+			<= generate(cvitemwithcomment, technical_skills.programming) =>
+    \subsection{<= titles.S_5.other_skills =>}
+		  <= generate(cvitemwithcomment, other_skills) =>
+
+	% == Additional Informations ================================================
+	%\section{<= titles.S_6.additional_information =>}
+
+	%	\cvitem{<= titles.S_6.publications =>}{<= generate(list, publications) =>}
+
+
+	% == Bibliography ===========================================================
+	\renewcommand{\refname}{Articles}		% The heading string
+	\nocite{*}
+	\bibliographystyle{plain}
+	\bibliography{publications}					% Bibliography is from that BibTeX file
+
+\end{document}

@@ -2,6 +2,5 @@
 module CGen::DataLoader; end
 
 
-# Require the YAML data loader
-# At the moment we always use this data loader. In the future would be good if the user could choose the data loader
-require 'cgen/data_loader/yaml_data_loader'
+# Require all of the data loaders
+Dir.glob(File.join(File.dirname(__FILE__), 'data_loader/*.rb')) { |mod| require mod }

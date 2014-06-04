@@ -48,20 +48,20 @@ class CGen::Compiler
   def handle_generate(generator, param, data, lang)
     generators = {
         # Generic
-        cvitem: Curriculum::Generator::CvItem,
-        cventry: Curriculum::Generator::CvEntry,
-        cvitemwithcomment: Curriculum::Generator::CvItemWithComment,
-        cvdoubleitem: Curriculum::Generator::CvDoubleItem,
-        cvlistitem: Curriculum::Generator::CvListItem,
-        cvlistdoubleitem: Curriculum::Generator::CvListDoubleItem,
-        cvcolumn: Curriculum::Generator::CvColumn,
-        list: Curriculum::Generator::List,
+        cvitem: CGen::Generator::CvItem,
+        cventry: CGen::Generator::CvEntry,
+        cvitemwithcomment: CGen::Generator::CvItemWithComment,
+        cvdoubleitem: CGen::Generator::CvDoubleItem,
+        cvlistitem: CGen::Generator::CvListItem,
+        cvlistdoubleitem: CGen::Generator::CvListDoubleItem,
+        cvcolumn: CGen::Generator::CvColumn,
+        list: CGen::Generator::List,
         # Specific
-        work_experience: Curriculum::Generator::WorkExperience,
-        education: Curriculum::Generator::Education,
-        self_assessment: Curriculum::Generator::SelfAssessment,
+        work_experience: CGen::Generator::WorkExperience,
+        education: CGen::Generator::Education,
+        self_assessment: CGen::Generator::SelfAssessment,
         # Macro
-        macro_substitution: Curriculum::Generator::MacroSubstitution
+        macro_substitution: CGen::Generator::MacroSubstitution
     }
 
     generators.has_key?(generator) ?

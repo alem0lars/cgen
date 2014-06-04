@@ -4,8 +4,8 @@ require 'yaml'
 class CGen::DataLoader::YamlDataLoader
 
   def load_data(data_pth, trgt_lang, master_lang)
-    puts '>> Loading the curriculum data for: '.cyan + "#{trgt_lang}".white
-    puts '   using '.cyan + "#{master_lang}".white + ' as the default'.cyan
+    puts '>> Loading the curriculum data for '.cyan + ":#{trgt_lang}".light_black
+    puts '   using '.cyan + ":#{master_lang}".light_black + ' as the default'.cyan
 
     trgt_lang_data_pth = data_pth.join(trgt_lang.to_s)
     master_lang_data_pth = data_pth.join(master_lang.to_s)

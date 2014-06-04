@@ -7,8 +7,9 @@ class CGen::Compiler
   end
 
   def compile(data, template_pth, lang)
-    puts '>> Compiling the language '.cyan + ":#{lang}".white
-    puts '   against the template   '.cyan + template_pth.to_s.white
+    puts '>> Compiling the language    '.cyan + ":#{lang}".light_black
+    puts '   against the template      '.cyan + template_pth.to_s.light_black
+    puts '   into the output directory '.cyan + @tex_out_pth.to_s.light_black
 
     Dir.glob(template_pth.join('**').join('*')) do |file_pth|
       if File.file?(file_pth)

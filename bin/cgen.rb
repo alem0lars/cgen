@@ -10,14 +10,14 @@ def setup_opts
 
   $tmp_pth = Pathname.new Dir.mktmpdir
   $tex_out_pth = Pathname.new Dir.mktmpdir
+  $log_dir = $tmp_pth.join('log')
 
-  $data_pth = Pathname.new File.expand_path(ask("What's the path for the directory containing the data ? "))
-  $out_pth = Pathname.new File.expand_path(ask("What's the destination path ? "))
-  $main_tex_file_name = ask('Main TeX file name ? ') { |q| q.default = 'main.tex' }
-  $resources_dir_name = ask("What's the name for the directory containing the resources " +
-                            '(relative to the directory that contains the template) ? ') { |q| q.default = 'resources' }
+  $data_pth = Pathname.new File.expand_path(ask("What's the path for the directory containing the data ? ".magenta))
+  $out_pth = Pathname.new File.expand_path(ask("What's the destination path ? ".magenta))
+  $main_tex_file_name = ask('Main TeX file name ? '.magenta) { |q| q.default = 'main.tex' }
+  $resources_dir_name = ask("What's the name for the directory containing the resources (relative to the directory that contains the template) ? ".magenta) { |q| q.default = 'resources' }
   $template_pth = Pathname.new(File.expand_path(
-      ask("What's the path of the template (leave empty for the default template) ? ") { |q|
+      ask("What's the path of the template (leave empty for the default template) ? ".magenta) { |q|
         q.default = File.join(File.dirname(File.dirname(__FILE__)), 'static', 'bundled_templates')
       }))
 
@@ -31,6 +31,14 @@ end
 # Setup the files / directories
 def setup_filesystem
   FileUtils.mkdir_p($out_pth)
+  FileUtils.mkdir_p($log_dir)
+end
+
+
+# == Utilities =========================================================================================================
+
+def create_log_file(name)
+  $log_dir.join("log_#{DateTime.now.strftime('%Y.%m.%d')}_#{name}.txt")
 end
 
 
@@ -54,13 +62,17 @@ $curriculum.compile($langs)
 puts '> Generating PDFs'.green
 
 $langs.each do |lang|
-  puts '>> Generating PDF for language '.cyan + lang.to_s.white
+  puts '>> Generating PDF for language '.cyan + lang.to_s.light_black
 
   input_dir = $tex_out_pth.join(lang.to_s)
+  out_pth = $out_pth.join(lang.to_s)
+  FileUtils.mkdir_p(out_pth)
 
   latex_to_pdf = CGen::Util::LatexToPdf.new($main_tex_file_name,
                                             input_dir,
                                             input_dir.join($resources_dir_name).join('*').to_s,
-                                            $out_pth.join(lang.to_s))
+                                            out_pth,
+                                            create_log_file('latex_to_pdf'))
   latex_to_pdf.generate
+
 end

@@ -1,7 +1,7 @@
 class CGen::Util::LatexToPdf
 
   def initialize(
-      input_file_name, input_dir, resources_pths, out_dir,
+      input_file_name, input_dir, resources_pths, out_dir, log_file,
       halt_on_error=true, shell_enabled=true, interpreter='xelatex', additional_args=[])
     @interpreter = interpreter
     @halt_on_error = !!halt_on_error
@@ -10,42 +10,44 @@ class CGen::Util::LatexToPdf
     @input_file_name = input_file_name
     @input_dir = input_dir
     @resources_pths = resources_pths
+    @log_file = log_file
     @additional_args = additional_args.is_a?(Array) ? additional_args : []
   end
 
   def generate
     starting_resources_files = resources_files
 
-    Either.chain do
-      bind -> { run_cmd(get_tex_cmd, @input_dir) }
-      bind -> { run_cmd(get_bibtex_cmd, @out_dir) }
-      bind -> { run_cmd(get_tex_cmd, @input_dir) }
-      bind -> { run_cmd(get_tex_cmd, @input_dir) }
-      bind -> {
-        # if the generation succeeds, cleanup intermediate files
-        dirty_files = resources_files - starting_resources_files
-        system("rm #{dirty_files.join(' ')}") if dirty_files.length > 0
-      }
-    end
+    run_cmd(get_tex_cmd, @input_dir) and
+        run_cmd(get_bibtex_cmd, @out_dir) and
+        run_cmd(get_tex_cmd, @input_dir) and
+        run_cmd(get_tex_cmd, @input_dir) and
+        cleanup_intermediate_resources(starting_resources_files)
   end
 
   protected
 
-  def run_cmd(command, execution_dir, log_file_pth=nil)
+  def cleanup_intermediate_resources(starting_resources)
+    dirty_files = resources_files - starting_resources
+    system("rm #{dirty_files.join(' ')}") if dirty_files.length > 0
+    true # return
+  end
+
+  def run_cmd(command, execution_dir)
     status = true
 
     Process.waitpid(
         fork do
+          original_stdout, original_stderr = $stdout, $stderr
           begin
             Dir.chdir execution_dir
-            original_stdout, original_stderr = $stdout, $stderr
-            $stderr = $stdout = File.exist?(log_file_pth) ? File.open(log_file_pth, 'a') : nil
+            file = File.open(@log_file, 'a')
+            $stderr = $stdout = file
             exec command
-          rescue
+          rescue Exception => exc
+            puts exc.message
             status = false
           ensure
             $stdout, $stderr = original_stdout, original_stderr
-            status = false
           end
         end)
 

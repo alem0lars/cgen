@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+
+
+require 'fileutils'
+require 'getopts'
+require 'cgen'
+
+
+puts '> Starting Curriculum'.green
+
+
+# CGen entry point
+def main
+
+  parse_arguments
+
+  setup_filesystem
+  setup_langs
+
+  $curriculum = Curriculum.new(
+      Curriculum::DataLoader::YamlDataLoader.new,
+      Curriculum::Compiler::BasicCompiler.new(TEX_OUT_PTH),
+      DATA_PTH,
+      TEMPLATE_PTH,
+      LANGS_ALL,
+      File.directory?(DATA_PTH.join('en')) ? :en : nil)
+
+  $curriculum.compile($langs)
+
+  puts '> Generating PDFs'.green
+
+  LANGS_ALL.each do |lang|
+
+    puts ">> Generating PDF for language ".cyan + "#{lang}".white
+
+    tex_root_dir_pth = TEX_OUT_PTH.join(lang.to_s)
+    tex_resource_pths = tex_root_dir_pth.join($resources_dir_name).join('*').to_s
+    pdf_lang_out_pth = PDF_OUT_PTH.join(lang.to_s)
+
+    LatexToPdf.new($main_tex_file_name, input_dir, resources_pths, pdf_lang_out_pth).generate
+
+  end
+
+end
+
+def parse_arguments
+
+  OptionParser.new do |o|
+    o.on('-m MAIN_TEX_FILE_NAME') { |filename| $main_tex_file_name = filename }
+    o.on('-r RESOURCES_DIR_NAME') { |resources_dir_name| $resources_dir_name = resources_dir_name }
+    o.on('-l') { |langs| $langs = langs }
+    o.on('-h') { puts o; exit }
+    o.parse!
+  end
+
+end
+
+# == Setup functions ===================================================================================================
+
+# Setup the files / directories and the global variables for those
+def setup_filesystem
+  ROOT_PTH = Pathname.new(File.dirname(__FILE__))
+  DATA_PTH = ROOT_PTH.join('data')
+  TEMPLATE_PTH = ROOT_PTH.join('template')
+  TMP_PTH = ROOT_PTH.join('tmp')
+  OUT_PTH = ROOT_PTH.join('out')
+  TEX_OUT_PTH = OUT_PTH.join('tex')
+  PDF_OUT_PTH = OUT_PTH.join('pdf')
+
+  FileUtils.mkdir_p(OUT_PTH)
+  FileUtils.mkdir_p(TEX_OUT_PTH)
+  FileUtils.mkdir_p(PDF_OUT_PTH)
+end
+
+# Ensure that the languages are correctly setup, i.e. if they aren't given use all of the available languages
+def setup_langs
+
+  $langs ||= Dir.glob(DATA_PTH.join('*')).collect do |lang_data_pth|
+    File.basename(lang_data_pth).to_sym
+  end
+
+end

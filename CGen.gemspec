@@ -16,18 +16,18 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache 2'
 
   spec.files         = `git ls-files -z`.split("\x0")
-  # spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  # spec.test_files    = spec.files.grep(%r{^(test|spec)/})
-  # spec.require_paths = ['lib']
-  #
-  # spec.add_development_dependency 'bundler', '~> 1.6'
-  # spec.add_development_dependency 'rake'
-  #
-  # spec.add_runtime_dependency     'monadic'
-  # spec.add_runtime_dependency     'erubis'
-  # spec.add_runtime_dependency     'awesome_print'
-  # spec.add_runtime_dependency     'colorize'
-  # spec.add_runtime_dependency     'hash-deep-merge'
-  # spec.add_runtime_dependency     'require_all'
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec)/})
+  spec.require_paths = ['lib']
+
+  spec.add_development_dependency 'bundler', '~> 1.6'
+  spec.add_development_dependency 'rake'
+
+  spec.add_runtime_dependency     'monadic'
+  spec.add_runtime_dependency     'erubis'
+  spec.add_runtime_dependency     'awesome_print'
+  spec.add_runtime_dependency     'colorize'
+  spec.add_runtime_dependency     'hash-deep-merge'
+  spec.add_runtime_dependency     'require_all'
 
 end

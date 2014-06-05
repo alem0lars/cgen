@@ -1,25 +1,77 @@
 \documentclass[11pt,a4paper,sans]{moderncv}
 
-\input{./header/packages}
+
+% ==> Document management
+
+\usepackage{import}
 
 
-% == Theme ====================================================================
+% ==> Character, Language, Encoding settings
+
+% Unicode support
+\usepackage{xunicode}
+\usepackage{xltxtra}
+% Internationalization
+\usepackage[english]{babel}
+% Character encoding
+\usepackage[utf8]{inputenc}
+% Facilities for inline and display quotations
+\usepackage[babel]{csquotes}
+
+
+% ==> Layout
+
+% Change the page layout in the middle of a document
+\usepackage{chngpage}
+
+
+% ==> Math
+
+\usepackage{amsmath,unicode-math}
+
+
+% ==> Miscellaneous additional features
+
+% Allow colors
+\usepackage{xcolor}
+
+
+% ==> Miscellaneous Additional elements
+
+% Capabilities for highlight and underline
+\usepackage[normalem]{ulem}
+% Create hyperlinks
+\usepackage{url}
+\usepackage[colorlinks=true, unicode, pdfencoding=auto]{hyperref}
+% Todos
+\usepackage[colorinlistoftodos, textwidth=4cm, shadow]{todonotes}
+% Typeset relevant quotations
+\usepackage{epigraph}
+% Code inclusion with syntax highlighting
+\usepackage{minted}
+% Beautiful frames
+\usepackage{framed}
+
+
+% ==> Theme
+
 % Theme style
 \moderncvstyle{casual}
 % Theme color (used for decorations)
 \moderncvcolor{blue}
 
 
-% == Page settings ============================================================
+% ==> Page settings
+
 % Adjust the page margins
 \usepackage[scale=0.8]{geometry}
-
 % Adjust the columns margin for the tabular
 \setlength\arrayrulewidth{.4pt}
 \setlength\tabcolsep{2pt}
 
 
-% == Author data ==============================================================
+% ==> Author data
+
 % First name
 \firstname{<= global.first_name =>}
 % Second name
@@ -45,95 +97,112 @@
 \photo[64pt][0.4pt]{./resources/AuthorPhoto}
 
 
-% == Document informations ====================================================
-\title{<= global.title =>}			% Document title
-\quote{<= global.quote =>}				% A quote to recap my point of view
+% ==> Document informations
+
+% Document title
+\title{<= global.title =>}
+% A quote to recap my point of view
+\quote{<= global.quote =>}
 
 
-% == Bibliography =============================================================
+% ==> Bibliography
+
 \makeatletter
 \renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
 \makeatother
 
 
-% == Content ==================================================================
-\begin{document}
+% ==> Content
 
+\begin{document}
 
 	\makecvtitle
 
 
-	% == Personal Information ===================================================
+	% ==> Personal Information
+	
 	\section{<= titles.S_1.personal_info =>}
-
-		\cvitem{<= titles.S_1.name =>}{%
-			<= global.first_name =>~<= global.sur_name =>%
-		}
+        % Fullname
+		\cvitem{<= titles.S_1.name =>}{<= global.first_name =>~<= global.sur_name =>}
+		% Address
 		\cvitem{<= titles.S_1.address =>}{%
 			<= global.address.street =>~--~%
 			<= global.address.postal_code =>~--~%
 			<= global.address.city =>%
 		}
+		% Telephone
 		\cvitem{<= titles.S_1.telephone =>}{<= global.mobile_phone =>}
+		% Fax
 		\cvitem{<= titles.S_1.fax =>}{<= global.fax =>}
+		% Email
 		\cvitem{<= titles.S_1.email =>}{<= global.email =>}
+		% Nationality
 		\cvitem{<= titles.S_1.nationality =>}{<= global.nationality =>}
+		% Birthdate
 		\cvitem{<= titles.S_1.date_birth =>}{<= global.date_birth =>}
+		% Gender
 		\cvitem{<= titles.S_1.sex =>}{<= global.sex =>}
 
 
-	% == Desidered Employment ===================================================
+	% ==> Desired Employment
+	
 	\section{<= titles.S_2.desired_employment => }
-
 		<= generate(cvlistitem, desired_employments) =>
 
 
-	% == Education and training =================================================
+	% ==> Education and training
+	
 	\section{<= titles.S_4.education_and_training =>}
-
 		<= generate(education, education) =>
 
 
-	% == Work Experience ========================================================
+	% ==> Work Experience
+	
 	\section{<= titles.S_3.work_experience =>}
-
 		<= generate(work_experience, work_experience) =>
 
 
-	% == Personal skills and competences ========================================
+	% ==> Personal skills and competences
+	
 	\section{<= titles.S_5.personal_skills =>}
-
+        % Mother tongue
 		\cvitem{<= titles.S_5.mother_tongue =>}{<= language_skills.mother_tongue =>}
-
+        % Other languages
 		\cvitem{<= titles.S_5.other_languages =>}{<= generate(list, language_skills.other_languages) =>}
-
+        % Self assessment
 		<= generate(self_assessment, self_assessment) =>
-
+        % Driving license
 		\cvitem{<= titles.S_5.driving_license =>}{<= driving_license =>}
-
+        % Social skills
 		\cvitem{<= titles.S_5.social_skills =>}{<= generate(list, social_skills) =>}
-
+        % Organisational skills
 		\cvitem{<= titles.S_5.organisational_skills =>}{<= generate(list, organisational_skills) =>}
-
+        % Analysis skills
 		\subsection{<= titles.S_5.analysis_skills =>}
 			<= generate(cvitemwithcomment, technical_skills.analysis) =>
+	    % Design skills
 		\subsection{<= titles.S_5.design_skills =>}
 			<= generate(cvitemwithcomment, technical_skills.design) =>
+		% Programming skills
 		\subsection{<= titles.S_5.programming_skills =>}
 			<= generate(cvitemwithcomment, technical_skills.programming) =>
+	% Other skills
     \subsection{<= titles.S_5.other_skills =>}
 		  <= generate(cvitemwithcomment, other_skills) =>
 
-	% == Additional Informations ================================================
+	% ==> Additional Informations
 	%\section{<= titles.S_6.additional_information =>}
 
 	%	\cvitem{<= titles.S_6.publications =>}{<= generate(list, publications) =>}
 
 
-	% == Bibliography ===========================================================
-	\renewcommand{\refname}{Articles}		% The heading string
+	% ==> Bibliography
+	
+	% The heading string
+	\renewcommand{\refname}{Articles}
 	\nocite{*}
 	\bibliographystyle{plain}
-	\bibliography{publications}					% Bibliography is from that BibTeX file
+	% Bibliography is from that BibTeX file
+	\bibliography{publications}
 
 \end{document}

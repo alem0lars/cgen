@@ -18,7 +18,6 @@ class CGen::Generator::SelfAssessment < CGen::Generator::BasicGenerator
     \\cvitem{<%= @titles['S_5']['self_assessment'] %>}
 
     {
-    \\begin{table}
     \\scriptsize
     \\begin{tabular}{l|l|l|l|l|l|l|l|l|l|l}
 
@@ -52,7 +51,6 @@ class CGen::Generator::SelfAssessment < CGen::Generator::BasicGenerator
       \\hline
 
     \\end{tabular}
-    \\end{table}
     }
 
     CODE

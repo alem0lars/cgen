@@ -6,24 +6,27 @@ class CGen::Compiler
     @line_regex = /(?<re>\<=(?:(?<ctnt>(?>[^<>=]+)|\g<re>)+)\=\>)/
   end
 
-  def validate_deps(template_deps_file_pth)
+  def validate_deps(deps_file_pth)
     puts '>> Ensuring that the dependencies are satisfied'
 
     # ==> Load the data from the YAML file
     data = {}
-    File.open(template_deps_file_pth.to_s, 'r') { |template_deps_file| data.merge!(YAML::load(template_deps_file)) }
-
-    puts data
+    File.open(deps_file_pth.to_s, 'r') { |deps_file| data.merge!(YAML::load(deps_file)) }
 
     # ==> Validate commands are available on the system
-    data.has_key?('cmds') && data['cmds'].respond_to?(:all?) && data['cmds'].all? { |cmd|
+    data.has_key?('cmds') && data['cmds'].respond_to?(:all?) && data['cmds'].all? do |cmd|
       CGen::Util::ShellCommand.exist?(cmd) ? true : puts(">> Command #{cmd} not found".red)
-    }
+    end
 
     # ==> Validate that the required fonts are available
-    data.has_key?('pkgs') && data['pkgs'].respond_to?(:all?) && data['pkgs'].all? { |pkg|
+    data.has_key?('pkgs') && data['pkgs'].respond_to?(:all?) && data['pkgs'].all? do |pkg|
       `tlmgr list --only-installed | grep "i #{pkg}:"`.strip.length > 0 ? true : puts(">> Package #{pkg} not found".red)
-    }
+    end
+
+    # Outputs the manual dependencies
+    data.has_key?('manual_deps') && data['manual_deps'].respond_to?(:each) do |manual_dep|
+      puts '>> Please ensure that the manual dependency is installed:'.yellow + manual_dep.to_s.light_black
+    end
   end
 
   def compile(data, template_pth, lang)

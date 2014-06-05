@@ -21,7 +21,7 @@ def setup_opts
         q.default = File.join(File.dirname(File.dirname(__FILE__)), 'static', 'bundled_templates', 'moderncv')
       }))
   $template_deps_file_pth = Pathname.new(File.expand_path(
-      ask("What's the path for the YAML file containing the dependencies ?") { |q|
+      ask("What's the path for the YAML file containing the dependencies ? ".magenta) { |q|
         q.default = $template_dir_pth.join('deps.yml').to_s
       }))
 
@@ -61,10 +61,13 @@ $curriculum = CGen::Curriculum.new(
     $langs,
     File.directory?($data_pth.join('en')) ? :en : nil)
 
-exit -1 unless $curriculum.validate_deps($template_deps_file_pth)
+unless $curriculum.validate_deps($template_deps_file_pth)
+  CGen::Util::Logging.log(:fatal_error, msg: 'The dependencies are not satisfied')
+end
+
 $curriculum.compile($langs)
 
-puts '> Generating PDFs'.green
+puts '>> Generating PDFs'.green
 
 $langs.each do |lang|
   puts '>> Generating PDF for language '.cyan + lang.to_s.light_black

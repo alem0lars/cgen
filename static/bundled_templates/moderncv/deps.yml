@@ -6,8 +6,10 @@ pkgs:
   - epigraph
   - minted
   - framed
-  - chngpage
   - csquotes
   - xcolor
   - ulem
   - todonotes
+
+manual_deps:
+  - The FontAwesome system font (http://fortawesome.github.io/Font-Awesome)

@@ -7,11 +7,9 @@ class CGen::Util::ShellCommand
   end
 
   def run
-    status = true
+    CGen::Util::Logging.log(:executing_command, cmd: @command, exec_dir: @execution_dir, log_file: @log_file)
 
-    puts '>> Executing          '.cyan + @command.to_s.light_black
-    puts '   from the directory '.cyan + @execution_dir.to_s.light_black
-    puts '   logging to         '.cyan + @log_file.to_s.light_black
+    status = true
 
     Process.waitpid(
         fork do

@@ -35,6 +35,10 @@ class CGen::Curriculum
     end
   end
 
+  def validate_deps(template_deps_file_pth)
+    @compiler.validate_deps template_deps_file_pth
+  end
+
   # Compile the curriculum for the provided languages
   def compile(langs)
     puts "> Compiling the curriculum for the languages: #{langs}".green

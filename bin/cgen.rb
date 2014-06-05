@@ -22,7 +22,7 @@ def setup_opts
       }))
   $template_deps_file_pth = Pathname.new(File.expand_path(
       ask("What's the path for the YAML file containing the dependencies ?") { |q|
-        q.default = $template_dir_pth.join('deps.yml')
+        q.default = $template_dir_pth.join('deps.yml').to_s
       }))
 
   # Ensure that the languages are correctly setup, i.e. if they aren't given use all of the available languages

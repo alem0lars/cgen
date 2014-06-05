@@ -1,12 +1,8 @@
 class CGen::Curriculum
 
-  attr_accessor(:langs)
-  attr_accessor(:master_lang)
-  attr_accessor(:data_loader)
-  attr_accessor(:compiler)
-  attr_accessor(:data_pth)
+  attr_accessor :langs, :master_lang, :data_loader, :compiler, :data_pth
 
-  def initialize(data_loader, compiler, data_pth, template_pth, langs = [], master_lang = nil)
+  def initialize(data_loader, compiler, data_pth, template_pth, langs=[], master_lang=nil)
     # Preconditions
     raise 'Invalid langs. It cannot be empty' if langs.empty?
 

@@ -15,43 +15,20 @@ class CGen::Util::LatexToPdf
   end
 
   def generate
-    starting_resources_files = resources_files
+    starting_resources = resources_files
 
-    run_cmd(get_tex_cmd, @input_dir) and
-        run_cmd(get_bibtex_cmd, @out_dir) and
-        run_cmd(get_tex_cmd, @input_dir) and
-        run_cmd(get_tex_cmd, @input_dir) and
-        cleanup_intermediate_resources(starting_resources_files)
+    gen_pdf_cmd = CGen::Util::ShellCommand.new(get_tex_cmd, @input_dir, @log_file)
+    gen_bib_cmd = CGen::Util::ShellCommand.new(get_bibtex_cmd, @out_dir, @log_file)
+
+    gen_pdf_cmd.run and gen_bib_cmd.run and gen_pdf_cmd.run and gen_pdf_cmd.run and clean_resources(starting_resources)
   end
 
   protected
 
-  def cleanup_intermediate_resources(starting_resources)
+  def clean_resources(starting_resources)
     dirty_files = resources_files - starting_resources
     system("rm #{dirty_files.join(' ')}") if dirty_files.length > 0
     true # return
-  end
-
-  def run_cmd(command, execution_dir)
-    status = true
-
-    Process.waitpid(
-        fork do
-          original_stdout, original_stderr = $stdout, $stderr
-          begin
-            Dir.chdir execution_dir
-            file = File.open(@log_file, 'a')
-            $stderr = $stdout = file
-            exec command
-          rescue Exception => exc
-            puts exc.message
-            status = false
-          ensure
-            $stdout, $stderr = original_stdout, original_stderr
-          end
-        end)
-
-    status # return
   end
 
   def get_tex_cmd

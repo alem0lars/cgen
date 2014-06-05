@@ -16,9 +16,13 @@ def setup_opts
   $out_pth = Pathname.new File.expand_path(ask("What's the destination path ? ".magenta))
   $main_tex_file_name = ask('Main TeX file name ? '.magenta) { |q| q.default = 'main.tex' }
   $resources_dir_name = ask("What's the name for the directory containing the resources (relative to the directory that contains the template) ? ".magenta) { |q| q.default = 'resources' }
-  $template_pth = Pathname.new(File.expand_path(
+  $template_dir_pth = Pathname.new(File.expand_path(
       ask("What's the path of the template (leave empty for the default template) ? ".magenta) { |q|
-        q.default = File.join(File.dirname(File.dirname(__FILE__)), 'static', 'bundled_templates')
+        q.default = File.join(File.dirname(File.dirname(__FILE__)), 'static', 'bundled_templates', 'moderncv')
+      }))
+  $template_deps_file_pth = Pathname.new(File.expand_path(
+      ask("What's the path for the YAML file containing the dependencies ?") { |q|
+        q.default = $template_dir_pth.join('deps.yml')
       }))
 
   # Ensure that the languages are correctly setup, i.e. if they aren't given use all of the available languages
@@ -53,10 +57,11 @@ $curriculum = CGen::Curriculum.new(
     CGen::DataLoader::YamlDataLoader.new, # TODO: Let the user choose the data loader
     CGen::Compiler.new($tex_out_pth),
     $data_pth,
-    $template_pth,
+    $template_dir_pth,
     $langs,
     File.directory?($data_pth.join('en')) ? :en : nil)
 
+exit -1 unless $curriculum.validate_deps($template_deps_file_pth)
 $curriculum.compile($langs)
 
 puts '> Generating PDFs'.green

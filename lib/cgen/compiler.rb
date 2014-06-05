@@ -6,6 +6,19 @@ class CGen::Compiler
     @line_regex = /(?<re>\<=(?:(?<ctnt>(?>[^<>=]+)|\g<re>)+)\=\>)/
   end
 
+  def validate_deps(template_deps_pth)
+    puts '>> Ensuring that the dependencies are satisfied'
+
+    # ==> Load the data from the YAML file
+    data = {}
+    File.open(template_deps_pth, 'r') { |template_deps_file| data.merge!(YAML::load(template_deps_file)) }
+
+    # ==> Validate commands are available on the system
+    data.has_key?(:cmds) && data[:cmds].respond_to?(:all) && data[:cmds].all { |cmd|
+      CGen::Util::ShellCommand.exist?(cmd) ? true : puts(">> Command #{cmd} not found".red)
+    }
+  end
+
   def compile(data, template_pth, lang)
     puts '>> Compiling the language    '.cyan + ":#{lang}".light_black
     puts '   against the template      '.cyan + template_pth.to_s.light_black

@@ -44,12 +44,6 @@ The project follows the **Scrum Methodology**, using Trello as the main tool.
 
 The board is available under: [CGen Trello Board](https://trello.com/b/8er5R7dK/cgen)
 
-Thus, the Github-Trello integration has been set up, with the following rules:
-
-1. The pull requests will be available in the *Pull Requests* Trello list
-2. The "normal" commits will be available in the *Product Backlog*
-3. The commits that shouldn't be available in the *Product Backlog* should start with `[no-trello]`. Mainly, these are the intermediate commits.
-
 #### Report bugs / Request enhancements
 
 Create a new card in the *Product Backlog* list:

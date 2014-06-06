@@ -15,7 +15,7 @@ class CGen::DataLoader::YamlDataLoader
     master_data = load_recursive_from_pth(trgt_lang_data_dir_pth)
     trgt_data = load_recursive_from_pth(master_lang_data_dir_pth)
 
-    master_data.deep_merge(trgt_data) # return
+    trgt_data.deep_merge(master_data) # return
   end
 
   # Load all of the YAML file starting from the given `base_dir_pth` and merges all of the data into an `Hash` and

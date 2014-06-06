@@ -23,7 +23,6 @@ class CGen::Curriculum
       inst = self
       Either.chain do
         bind -> { lang_data_pth.directory? }
-        bind -> { puts ">> Picking up the language :#{lang}".cyan; true }
         bind -> {
           lang_data = inst.data_loader.load_data(inst.data_pth, lang.to_sym, inst.master_lang.to_sym)
           lang_data.is_a?(Hash) ? Success(lang_data) : Failure('lang data')

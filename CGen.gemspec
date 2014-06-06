@@ -7,7 +7,7 @@ require 'cgen/version'
 
 Gem::Specification.new do |spec|
 
-  spec.name          = 'CGen'
+  spec.name          = 'cgen'
   spec.version       = CGen::VERSION
   spec.authors       = ['Alessandro Molari']
   spec.email         = ['molari.alessandro@gmail.com']

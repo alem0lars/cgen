@@ -6,11 +6,10 @@ class CGen::Generator::CvItemWithComment < CGen::Generator::BasicGenerator
 
   def generate
     value = get_value(param)
-    unless value.is_a?(Array)
-      value = Array[value]
-    end
+    value = Array[value] unless value.is_a?(Array)
+
+    inst = self
     value.collect do |elem|
-      instance = self
       result = Either.chain do
         bind -> { elem.is_a?(Hash) }
         bind -> {
@@ -19,15 +18,12 @@ class CGen::Generator::CvItemWithComment < CGen::Generator::BasicGenerator
               elem.has_key?('comment')
         }
         bind -> {
-          instance.get_cv_item_with_comment(elem['title'], elem['content'],
-                                            elem['comment'])
+          inst.get_cv_item_with_comment(elem['title'], elem['content'], elem['comment'])
         }
       end
       result.success? ? result.fetch : ''
     end.join("\n")
   end
-
-  protected
 
   def get_cv_item_with_comment(title, content, comment)
     "\\cvitemwithcomment{#{title}}{#{content}}{#{comment}}"

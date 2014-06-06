@@ -25,6 +25,7 @@ class CGen::DataLoader::YamlDataLoader
     Dir.glob(base_dir_pth.join('**').join('*.yml')) do |yml_file_pth|
       File.open(yml_file_pth, 'r') { |yml_file| data.merge!(YAML::load(yml_file)) }
     end
+    puts data
     data # return
   end
 

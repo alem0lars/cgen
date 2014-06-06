@@ -12,7 +12,7 @@ Via homebrew
     
 Via rubygems
 
-    $ gem install cgen
+    $ gem install curriculum-generator
 
 
 ## Usage

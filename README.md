@@ -36,6 +36,31 @@ This is primarly for non-hackers. In this mode the curriculum is edited by using
 
 ## Contributing
 
+### Project management
+
+#### Scrum & Trello
+
+The project follows the **Scrum Methodology**, using Trello as the main tool.
+
+The board is available under: [CGen Trello Board](https://trello.com/b/8er5R7dK/cgen)
+
+Thus, the Github-Trello integration has been set up, with the following rules:
+
+1. The pull requests will be available in the *Pull Requests* Trello list
+2. The "normal" commits will be available in the *Product Backlog*
+3. The commits that shouldn't be available in the *Product Backlog* should start with `[no-trello]`. Mainly, these are the intermediate commits.
+
+#### Report bugs / Request enhancements
+
+Create a new card in the *Product Backlog* list:
+
+* With the *red* label for bug reporting
+* With the *blue* label to request an enhancement
+
+### Fork-Pull pattern
+
+The project contribution is commonly done by using the so-much-famous *fork-pull pattern*:
+
 1. Fork it ( https://github.com/[my-github-username]/cgen/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)

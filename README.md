@@ -1,28 +1,36 @@
 # CGen
 
-TODO: Write a gem description
+CGen is the next **localized Curriculum Vitae** editor, both for hackers and end-users.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Via rubygems
 
-    gem 'CGen'
+    $ gem install cgen
 
-And then execute:
+Via homebrew
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install CGen
+    $ brew install cgen
 
 ## Usage
 
-TODO: Write usage instructions here
+CGen provides two editing modes:
+1. **Hacking Mode**
+2. **Normal Mode**
+
+### Hacking Mode
+
+This is where CGen shrines, by allowing users to **just provide the data** and let the system do the rest. This system comes with *extensibility* in mind, by providing different level of customization
+
+### Normal Mode
+
+This is primarly for non-hackers. In this mode the curriculum is edited by using a GUI.
+
+*This mode is still in development: not released yet*.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/CGen/fork )
+1. Fork it ( https://github.com/[my-github-username]/cgen/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

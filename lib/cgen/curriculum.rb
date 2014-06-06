@@ -40,8 +40,9 @@ class CGen::Curriculum
 
   # Compile the curriculum for the provided languages
   def compile(langs)
-    puts "> Compiling the curriculum for the languages: #{langs}".green
+    puts '>> Compiling the curriculum for the languages: '.green + langs.join(' ').light_black
 
+    # TODO: Refactor into monads, with better error detection
     if langs.respond_to?(:each)
       langs.each do |lang|
         lang = lang.to_sym

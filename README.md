@@ -6,24 +6,21 @@ CGen is the next **localized Curriculum Vitae** editor, both for hackers and end
 
 ## Installation
 
-Via homebrew
-
-    $ brew install cgen
-    
 Via rubygems
 
     $ gem install curriculum-generator
 
-
 ## Usage
 
 CGen provides two editing modes:
-1. **Hacking Mode**
-2. **Normal Mode**
+
+* **Hacking Mode**
+* **Normal Mode**
 
 ### Hacking Mode
 
 This is where CGen shrines, by allowing users to **just provide the data** and let the system do the rest. This system comes with *extensibility* in mind, by providing different levels of customization:
+
 1. **Data-level**: The first level is the most commonly used. The system automatically pulls all of your defined data. This means that there isn't anything wired-in, no names, no values, anything. Data is just data and you can use it as you want !
 2. **Templates-level**: For basic customizations you can write your own (LaTeX) **templates**, or modify an existing one.
 3. **Generators-level**: For more advanced customizations, you can write your own (Ruby) **generators**.

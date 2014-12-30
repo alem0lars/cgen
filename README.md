@@ -2,7 +2,9 @@
 
 CGen is the next **localized Curriculum Vitae** editor, both for hackers and end-users.
 
-*Please note that this is still in early development stages. If you are an end-user you may want to check this project out in a couple of weeks.*
+![Status](http://img.shields.io/badge/status-OK-green.svg)
+
+*Please note that this is still in early development stages, bug reporting really welcome!*
 
 ## Installation
 

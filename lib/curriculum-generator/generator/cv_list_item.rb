@@ -1,4 +1,4 @@
-class CurriculumGenerator
+module CurriculumGenerator
   module Generator
     class CvListItem < BasicGenerator
 

@@ -13,7 +13,7 @@ require "erubis"
 # Require the project stuff.
 require "curriculum-generator/version"
 require "curriculum-generator/util"
+require "curriculum-generator/generator"
 require "curriculum-generator/compiler"
 require "curriculum-generator/curriculum"
 require "curriculum-generator/data_loader"
-require "curriculum-generator/generator"

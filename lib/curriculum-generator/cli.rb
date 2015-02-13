@@ -50,15 +50,16 @@ module CurriculumGenerator
     def setup_opts
       $tmp_pth = Pathname.new Dir.mktmpdir
       $tex_out_pth = Pathname.new Dir.mktmpdir
-      $log_dir = $tmp_pth.join('log')
+      $log_dir = $tmp_pth.join("log")
 
       $data_pth = Pathname.new File.expand_path(ask("What's the path for the directory containing the data ? ".magenta))
       $out_pth = Pathname.new File.expand_path(ask("What's the destination path ? ".magenta))
       $main_tex_file_name = ask('Main TeX file name ? '.magenta) { |q| q.default = 'main.tex' }
       $resources_dir_name = ask("What's the name for the directory containing the resources (relative to the directory that contains the template) ? ".magenta) { |q| q.default = 'resources' }
+      $root_path = File.dirname(File.dirname(File.dirname(__FILE__)))
       $template_dir_pth = Pathname.new(File.expand_path(
           ask("What's the path of the template (leave empty for the default template) ? ".magenta) { |q|
-            q.default = File.join(File.dirname(File.dirname(__FILE__)), 'static', 'bundled_templates', 'moderncv')
+            q.default = File.join($root_path, 'static', 'bundled_templates', 'moderncv')
           }))
       $template_deps_file_pth = Pathname.new(File.expand_path(
           ask("What's the path for the YAML file containing the dependencies ? ".magenta) { |q|

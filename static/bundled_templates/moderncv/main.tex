@@ -11,12 +11,16 @@
 % Unicode support
 \usepackage{xunicode}
 \usepackage{xltxtra}
-% Internationalization
+% Internationalisation
 \usepackage[english]{babel}
 % Character encoding
 \usepackage[utf8]{inputenc}
 % Facilities for inline and display quotations
 \usepackage[babel]{csquotes}
+% Fonts.
+\defaultfontfeatures{
+		Path = /usr/local/texlive/2014/texmf-dist/fonts/opentype/public/fontawesome/ }
+\usepackage{fontawesome}
 
 
 % ==> Layout
@@ -120,7 +124,7 @@
 
 
 	% ==> Personal Information
-	
+
 	\section{<= titles.S_1.personal_info =>}
         % Fullname
 		\cvitem{<= titles.S_1.name =>}{<= global.first_name =>~<= global.sur_name =>}
@@ -145,25 +149,25 @@
 
 
 	% ==> Desired Employment
-	
+
 	\section{<= titles.S_2.desired_employment => }
 		<= generate(cvlistitem, desired_employments) =>
 
 
 	% ==> Education and training
-	
+
 	\section{<= titles.S_4.education_and_training =>}
 		<= generate(education, education) =>
 
 
 	% ==> Work Experience
-	
+
 	\section{<= titles.S_3.work_experience =>}
 		<= generate(work_experience, work_experience) =>
 
 
 	% ==> Personal skills and competences
-	
+
 	\section{<= titles.S_5.personal_skills =>}
         % Mother tongue
 		\cvitem{<= titles.S_5.mother_tongue =>}{<= language_skills.mother_tongue =>}
@@ -197,7 +201,7 @@
 
 
 	% ==> Bibliography
-	
+
 	% The heading string
 	\renewcommand{\refname}{Articles}
 	\nocite{*}

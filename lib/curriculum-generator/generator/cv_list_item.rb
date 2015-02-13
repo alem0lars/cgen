@@ -1,4 +1,4 @@
-class CGen::Generator::CvListItem < CGen::Generator::BasicGenerator
+class CurriculumGenerator::Generator::CvListItem < CurriculumGenerator::Generator::BasicGenerator
 
   def initialize(param, data, lang)
     super(param, data, lang)

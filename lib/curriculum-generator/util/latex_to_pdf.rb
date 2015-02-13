@@ -1,4 +1,4 @@
-class CGen::Util::LatexToPdf
+class CurriculumGenerator::Util::LatexToPdf
 
   def initialize(
       input_file_name, input_dir, resources_pths, out_dir, log_file,
@@ -20,9 +20,9 @@ class CGen::Util::LatexToPdf
     starting_resources = resources_files
 
     # Create the command used to generate the PDF
-    gen_pdf_cmd = CGen::Util::ShellCommand.new(get_tex_cmd, @input_dir, @log_file)
+    gen_pdf_cmd = CurriculumGenerator::Util::ShellCommand.new(get_tex_cmd, @input_dir, @log_file)
     # Create the command used to generate the bibliography
-    gen_bib_cmd = CGen::Util::ShellCommand.new(get_bibtex_cmd, @out_dir, @log_file)
+    gen_bib_cmd = CurriculumGenerator::Util::ShellCommand.new(get_bibtex_cmd, @out_dir, @log_file)
 
     Either.chain do
       bind -> { gen_pdf_cmd.run }

@@ -1,4 +1,4 @@
-class CGen::Generator::MacroSubstitution < CGen::Generator::BasicGenerator
+class CurriculumGenerator::Generator::MacroSubstitution < CurriculumGenerator::Generator::BasicGenerator
 
   def initialize(param, data, lang)
     super(param, data, lang)

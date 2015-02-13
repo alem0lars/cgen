@@ -1,4 +1,4 @@
-class CGen::Generator::Education < CGen::Generator::BasicGenerator
+class CurriculumGenerator::Generator::Education < CurriculumGenerator::Generator::BasicGenerator
 
   def initialize(param, data, lang)
     super(param, data, lang)

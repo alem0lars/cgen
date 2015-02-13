@@ -1,6 +1,6 @@
-# CGen
+# CurriculumGenerator
 
-CGen is the next **localized Curriculum Vitae** editor, both for hackers and end-users.
+CurriculumGenerator is the next **localized Curriculum Vitae** editor, both for hackers and end-users.
 
 *Please note that this is still in early development stages, bug reporting is really welcome!*
 
@@ -12,7 +12,7 @@ Via rubygems
 
 ## Usage
 
-CGen provides two editing modes:
+CurriculumGenerator provides two editing modes:
 
 * **Hacking Mode**
 * **Normal Mode**
@@ -21,7 +21,7 @@ CGen provides two editing modes:
 
 ![Status](http://img.shields.io/badge/status-OK-green.svg)
 
-This is where CGen shrines, by allowing users to **just provide the data** and let the system do the rest. This system comes with *extensibility* in mind, by providing different levels of customization:
+This is where CurriculumGenerator shrines, by allowing users to **just provide the data** and let the system do the rest. This system comes with *extensibility* in mind, by providing different levels of customization:
 
 1. **Data-level**:
   The first level is the most commonly used.
@@ -51,7 +51,7 @@ In this mode the curriculum is edited by using a GUI.
 
 The project follows the **Scrum Methodology**, using Trello as the main tool.
 
-The board is available under: [CGen Trello Board](https://trello.com/b/8er5R7dK/cgen)
+The board is available under: [CurriculumGenerator Trello Board](https://trello.com/b/8er5R7dK/curriculum-generator)
 
 #### Report bugs / Request enhancements
 
@@ -64,7 +64,7 @@ Create a new card in the *Product Backlog* list:
 
 The project contribution is commonly done by using the so-much-famous *fork-pull pattern*:
 
-1. Fork it ( https://github.com/[my-github-username]/cgen/fork )
+1. Fork it ( https://github.com/[my-github-username]/curriculum-generator/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

@@ -1,4 +1,4 @@
-class CGen::Generator::SelfAssessment < CGen::Generator::BasicGenerator
+class CurriculumGenerator::Generator::SelfAssessment < CurriculumGenerator::Generator::BasicGenerator
 
   def initialize(param, data, lang)
     super(param, data, lang)

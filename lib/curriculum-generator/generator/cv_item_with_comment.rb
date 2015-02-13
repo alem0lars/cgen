@@ -1,4 +1,4 @@
-class CGen::Generator::CvItemWithComment < CGen::Generator::BasicGenerator
+class CurriculumGenerator::Generator::CvItemWithComment < CurriculumGenerator::Generator::BasicGenerator
 
   def initialize(param, data, lang)
     super(param, data, lang)

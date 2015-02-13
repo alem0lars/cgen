@@ -1,13 +1,13 @@
 require 'yaml'
 
 
-class CGen::DataLoader::YamlDataLoader
+class CurriculumGenerator::DataLoader::YamlDataLoader
 
   # Load the localized data from the directory `data_dir_pth`, following the convention that the localized data for
   # a language are in a subdirectory of `data_dir_pth` named with the same name of the language.
   # The target language name (which is also the subdirectory name) is `trgt_lang`, which fallbacks to the `master_lang`
   def load_data(data_dir_pth, trgt_lang, master_lang)
-    CGen::Util::Logging.log(:loading_curriculum_data, trgt_lang: trgt_lang, master_lang: master_lang)
+    CurriculumGenerator::Util::Logging.log(:loading_curriculum_data, trgt_lang: trgt_lang, master_lang: master_lang)
 
     trgt_lang_data_dir_pth = data_dir_pth.join(trgt_lang.to_s)
     master_lang_data_dir_pth = data_dir_pth.join(master_lang.to_s)

@@ -1,10 +1,16 @@
 #!/usr/bin/env ruby
 
 
-require 'cgen'
+begin
+  require "rubygems"
+  gem "curriculum-generator"
+rescue LoadError
+end
+
+require "curriculum-generator"
 
 
-# == Setup functions ===================================================================================================
+# == Setup functions ===========================================================
 
 def setup_opts
 
@@ -39,48 +45,49 @@ def setup_filesystem
 end
 
 
-# == Utilities =========================================================================================================
+# == Utilities =================================================================
 
 def create_log_file(name)
   $log_dir.join("log_#{DateTime.now.strftime('%Y.%m.%d')}_#{name}.txt")
 end
 
 
-# == CGen entry point ==================================================================================================
+# == CurriculumGenerator entry point ==========================================================
 
 puts '> Starting Curriculum'.green
 
 setup_opts
 setup_filesystem
 
-$curriculum = CGen::Curriculum.new(
-    CGen::DataLoader::YamlDataLoader.new, # TODO: Let the user choose the data loader
-    CGen::Compiler.new($tex_out_pth),
+$curriculum = CurriculumGenerator::Curriculum.new(
+    CurriculumGenerator::DataLoader::YamlDataLoader.new, # TODO: Let the user choose the data loader
+    CurriculumGenerator::Compiler.new($tex_out_pth),
     $data_pth,
     $template_dir_pth,
     $langs,
     File.directory?($data_pth.join('en')) ? :en : nil)
 
 unless $curriculum.validate_deps($template_deps_file_pth)
-  CGen::Util::Logging.log(:fatal_error, msg: 'The dependencies are not satisfied')
+  CurriculumGenerator::Util::Logging.log(:fatal_error, msg: "The dependencies are not satisfied.")
 end
 
 $curriculum.compile($langs)
 
-puts '>> Generating PDFs'.green
+puts ">> Generating PDFs".green
 
 $langs.each do |lang|
-  puts '>> Generating PDF for language '.cyan + lang.to_s.light_black
+  puts ">> Generating PDF for language #{lang.to_s.light_black}".cyan
 
   input_dir = $tex_out_pth.join(lang.to_s)
   out_pth = $out_pth.join(lang.to_s)
   FileUtils.mkdir_p(out_pth)
 
-  latex_to_pdf = CGen::Util::LatexToPdf.new($main_tex_file_name,
-                                            input_dir,
-                                            input_dir.join($resources_dir_name).join('*').to_s,
-                                            out_pth,
-                                            create_log_file('latex_to_pdf'))
-  latex_to_pdf.generate
+  latex_to_pdf = CurriculumGenerator::Util::LatexToPdf.new(
+      $main_tex_file_name,
+      input_dir,
+      input_dir.join($resources_dir_name).join('*').to_s,
+      out_pth,
+      create_log_file('latex_to_pdf'))
 
+  latex_to_pdf.generate
 end

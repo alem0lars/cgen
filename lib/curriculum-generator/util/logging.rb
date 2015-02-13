@@ -1,4 +1,4 @@
-module CGen::Util::Logging
+module CurriculumGenerator::Util::Logging
 
   def self.log(name, opts={})
     case name

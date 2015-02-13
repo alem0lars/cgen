@@ -1,4 +1,4 @@
-class CGen::Util::ShellCommand
+class CurriculumGenerator::Util::ShellCommand
 
   def initialize(command, execution_dir, log_file=nil)
     @command = command
@@ -7,7 +7,7 @@ class CGen::Util::ShellCommand
   end
 
   def run
-    CGen::Util::Logging.log(:executing_command, cmd: @command, exec_dir: @execution_dir, log_file: @log_file)
+    CurriculumGenerator::Util::Logging.log(:executing_command, cmd: @command, exec_dir: @execution_dir, log_file: @log_file)
 
     status = true
 

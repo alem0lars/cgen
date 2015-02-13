@@ -1,4 +1,4 @@
-class CGen::Generator::CvItem < CGen::Generator::BasicGenerator
+class CurriculumGenerator::Generator::CvListDoubleItem < CurriculumGenerator::Generator::BasicGenerator
 
   def initialize(param, data, lang)
     super(param, data, lang)
@@ -13,8 +13,10 @@ class CGen::Generator::CvItem < CGen::Generator::BasicGenerator
       instance = self
       result = Either.chain do
         bind -> { elem.is_a?(Hash) }
-        bind -> { elem.has_key?('title') && elem.has_key?('content') }
-        bind -> { instance.get_cv_item(elem['title'], elem['content']) }
+        bind -> { elem.has_key?('item_0') && elem.has_key?('item_1') }
+        bind -> {
+          instance.get_cv_list_double_item(elem['item_0'], elem['item_1'])
+        }
       end
       result.success? ? result.fetch : ''
     end.join("\n")
@@ -22,8 +24,8 @@ class CGen::Generator::CvItem < CGen::Generator::BasicGenerator
 
   protected
 
-  def get_cv_item(title, content)
-    "\\cvitem{#{title}}{#{content}}"
+  def get_cv_list_double_item(item_0, item_1)
+    "\\cvlistdoubleitem{#{item_0}}{#{item_1}}"
   end
 
 end

@@ -1,11 +1,15 @@
-class CurriculumGenerator::Generator::MacroSubstitution < CurriculumGenerator::Generator::BasicGenerator
+module CurriculumGenerator
+  module Generator
+    class MacroSubstitution < BasicGenerator
 
-  def initialize(param, data, lang)
-    super(param, data, lang)
+      def initialize(param, data, lang)
+        super(param, data, lang)
+      end
+
+      def generate
+        get_value(param)
+      end
+
+    end
   end
-
-  def generate
-    get_value(param)
-  end
-
 end

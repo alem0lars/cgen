@@ -13,7 +13,7 @@ namespace :cli do
 
     require "curriculum-generator"
 
-    cli = CurriculumGenerator::CLI.new
+    cli = CurriculumGenerator::CLI.new(ARGV)
     cli.run
   end
 

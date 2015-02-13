@@ -1,7 +1,11 @@
 module CurriculumGenerator
   class CLI
 
-    def run(args)
+    def initialize(args)
+      @args = args
+    end
+
+    def run
       puts '> Starting Curriculum'.green
 
       setup_opts

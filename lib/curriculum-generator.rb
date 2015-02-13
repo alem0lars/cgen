@@ -17,3 +17,6 @@ require "curriculum-generator/generator"
 require "curriculum-generator/compiler"
 require "curriculum-generator/curriculum"
 require "curriculum-generator/data_loader"
+
+# Require the project entry points (a.k.a. the applications).
+require "curriculum-generator/cli"

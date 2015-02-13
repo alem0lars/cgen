@@ -1,4 +1,4 @@
-require 'rake'
+require "rake"
 
-require 'bundler/gem_tasks'
-require 'rake/clean'
+require "bundler/gem_tasks"
+require "rake/clean"
